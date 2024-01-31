@@ -8,8 +8,8 @@ imagen = imagen.convert('RGB')
 
 
 input_data = np.array(imagen)
-#input_data = input_data[:,:,2] -20
 input_data.shape
 
 plt.imshow(input_data/255)
 plt.show()
+

@@ -1,40 +1,15 @@
 from geopy.geocoders import Nominatim
 from geopy.point import Point
-
-geolocator = Nominatim(user_agent="my_app")
-location = geolocator.geocode("me")
-
-location
+import requests
+import json
 
 
 def detect_coor():
-    coor = [0,0]
+    with open('data/secreto/secretos.json') as f:
+        dk = json.load(f)
+    rec = requests.post(f"https://www.googleapis.com/geolocation/v1/geolocate?key={dk['Api']}")
+    print(rec)
+    coor = [rec.json()['location']['lat'] , rec.json()['location']['lng']]
     return coor
 ###################
 
-from geopy.geocoders import Nominatim
-
-
-def get_gps_coordinates(address):
-    geolocator = Nominatim(user_agent="uniqueName")
-    location = geolocator.geocode(address)
-    
-    if location:
-        latitude = location.latitude
-        longitude = location.longitude
-        return latitude, longitude
-    else:
-        return None
-
-
-if __name__ == "__main__":
-    
-    address = "me"
-    
-    coordinates = get_gps_coordinates(address)
-    
-    if coordinates:
-        latitude, longitude = coordinates
-        print(f"Latitude: {latitude}, Longitude: {longitude}")
-    else:
-        print("Location not found.")
