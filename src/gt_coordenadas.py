@@ -11,5 +11,4 @@ def detect_coor():
     print(rec)
     coor = [rec.json()['location']['lat'] , rec.json()['location']['lng']]
     return coor
-###################
 
